@@ -1,4 +1,4 @@
-package by.gsu.pms;
+package by.gsu.pms.exceptions;
 
 public class ParseDataException extends IllegalArgumentException {
 

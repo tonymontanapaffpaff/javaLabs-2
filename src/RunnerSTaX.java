@@ -1,6 +1,7 @@
+import by.gsu.pms.exceptions.CloseException;
 import by.gsu.pms.Constants;
-import by.gsu.pms.Currency;
-import by.gsu.pms.CurrencyReader;
+import by.gsu.pms.beans.Currency;
+import by.gsu.pms.handlers.CurrencyReader;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
@@ -20,22 +21,22 @@ public class RunnerSTaX {
         double rate = 0.0;
 
         try (CurrencyReader reader = new CurrencyReader(new URL(Constants.URL).openStream())) {
-            while (reader.startElement("Currency", "DailyExRates")) {
-                id = Integer.parseInt(reader.getAttribute("Id"));
+            while (reader.startElement(Constants.CURRENCY_ELEM, Constants.DAILY_RATES_ELEM)) {
+                id = Integer.parseInt(reader.getAttribute(Constants.ID_ELEM));
 
-                if (reader.startElement("NumCode", "Currency")) {
+                if (reader.startElement(Constants.NUM_CODE_ELEM, Constants.CURRENCY_ELEM)) {
                     numCode = Integer.parseInt(reader.getText());
                 }
-                if (reader.startElement("CharCode", "Currency")) {
+                if (reader.startElement(Constants.CHAR_CODE_ELEM, Constants.EMPTY_STRING)) {
                     charCode = reader.getText();
                 }
-                if (reader.startElement("Scale", "Currency")) {
+                if (reader.startElement(Constants.SCALE_ELEM, Constants.EMPTY_STRING)) {
                     scale = Integer.parseInt(reader.getText());
                 }
-                if (reader.startElement("Name", "Currency")) {
+                if (reader.startElement(Constants.NAME_ELEM, Constants.EMPTY_STRING)) {
                     name = reader.getText();
                 }
-                if (reader.startElement("Rate", "Currency")) {
+                if (reader.startElement(Constants.RATE_ELEM, Constants.EMPTY_STRING)) {
                     rate = Double.parseDouble(reader.getText());
                 }
 
@@ -44,7 +45,9 @@ public class RunnerSTaX {
 
             currencyList.forEach(System.out::println);
         } catch (XMLStreamException | IOException | NumberFormatException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
+        } catch (CloseException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

@@ -1,4 +1,7 @@
-package by.gsu.pms;
+package by.gsu.pms.beans;
+
+import by.gsu.pms.Constants;
+import by.gsu.pms.exceptions.ParseDataException;
 
 public class Currency {
     private int id;

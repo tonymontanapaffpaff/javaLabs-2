@@ -1,5 +1,5 @@
 import by.gsu.pms.Constants;
-import by.gsu.pms.Currency;
+import by.gsu.pms.beans.Currency;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -45,8 +45,8 @@ public class RunnerDOM {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     id = Integer.parseInt(eElement.getAttribute(Constants.ID_ELEM));
-                    numCode = Integer.parseInt(getElem(eElement, Constants.NUMCODE_ELEM));
-                    charCode = (getElem(eElement, Constants.CHARCODE));
+                    numCode = Integer.parseInt(getElem(eElement, Constants.NUM_CODE_ELEM));
+                    charCode = (getElem(eElement, Constants.CHAR_CODE_ELEM));
                     scale = Integer.parseInt((getElem(eElement, Constants.SCALE_ELEM)));
                     name = (getElem(eElement, Constants.NAME_ELEM));
                     rate = Double.parseDouble((getElem(eElement, Constants.RATE_ELEM)));
@@ -56,7 +56,7 @@ public class RunnerDOM {
 
             currencyList.forEach(System.out::println);
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 }

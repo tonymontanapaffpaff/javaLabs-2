@@ -1,4 +1,6 @@
-package by.gsu.pms;
+package by.gsu.pms.handlers;
+
+import by.gsu.pms.exceptions.CloseException;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -37,12 +39,12 @@ public class CurrencyReader implements AutoCloseable {
     }
 
     @Override
-    public void close() {
+    public void close() throws CloseException {
         if (reader != null) {
             try {
                 reader.close();
             } catch (XMLStreamException e) {
-                e.printStackTrace();
+                throw new CloseException(e);
             }
         }
     }

@@ -1,7 +1,7 @@
 import by.gsu.pms.Constants;
-import by.gsu.pms.Currency;
-import by.gsu.pms.CurrencyHandler;
-import by.gsu.pms.ParseDataException;
+import by.gsu.pms.beans.Currency;
+import by.gsu.pms.handlers.CurrencyHandler;
+import by.gsu.pms.exceptions.ParseDataException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -23,9 +23,9 @@ public class RunnerSAX {
                 System.out.println(currency);
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } catch (ParseDataException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
     }
 }

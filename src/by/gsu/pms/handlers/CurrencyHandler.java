@@ -1,5 +1,6 @@
-package by.gsu.pms;
+package by.gsu.pms.handlers;
 
+import by.gsu.pms.beans.Currency;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
