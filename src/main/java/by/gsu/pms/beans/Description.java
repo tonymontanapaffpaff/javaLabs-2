@@ -1,15 +1,20 @@
 package by.gsu.pms.beans;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Description {
     private final String id;
     private final String main;
-    private final String description;
+
+    @SerializedName("description")
+    private final String weatherInformation;
+
     private final String icon;
 
-    public Description(String id, String main, String description, String icon) {
+    public Description(String id, String main, String weatherInformation, String icon) {
         this.id = id;
         this.main = main;
-        this.description = description;
+        this.weatherInformation = weatherInformation;
         this.icon = icon;
     }
 
@@ -21,8 +26,8 @@ public class Description {
         return main;
     }
 
-    public String getDescription() {
-        return description;
+    public String getWeatherInformation() {
+        return weatherInformation;
     }
 
     public String getIcon() {

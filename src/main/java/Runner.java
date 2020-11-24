@@ -2,6 +2,8 @@ import by.gsu.pms.Utils;
 import by.gsu.pms.beans.WeatherCard;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,11 +12,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class Runner {
+
+    private static final Logger logger = LoggerFactory.getLogger(Runner.class);
+
     public static void main(String[] args) {
         try {
             final String URL =
                     "http://api.openweathermap.org/data/2.5/weather?id=5128638&appid=98c9b61d85e0e48254cd1b20cd8f067e";
-            final URL TEMPLATE_PATH = Runner.class.getResource("template.html");
+            final URL templatePath = Runner.class.getResource("template.html");
 
             File file = Utils.writeFromUrl(URL);
             JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(file)));
@@ -35,7 +40,7 @@ public class Runner {
             final String windDirection = card.getWindDirection();
             final String clouds = card.getClouds();
 
-            File htmlTemplateFile = new File(TEMPLATE_PATH.getFile());
+            File htmlTemplateFile = new File(templatePath.getFile());
             String htmlString = Utils.readFromFile(htmlTemplateFile);
 
             htmlString = htmlString.replace("$city", city);
@@ -55,7 +60,7 @@ public class Runner {
             File newHtmlFile = new File("out/widget.html");
             Utils.writeFromFile(newHtmlFile, htmlString);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

@@ -109,6 +109,6 @@ public class WeatherCard {
     }
 
     public String getFullDescription() {
-        return description.getDescription();
+        return description.getWeatherInformation();
     }
 }
