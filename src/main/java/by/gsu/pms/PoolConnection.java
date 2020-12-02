@@ -1,4 +1,4 @@
-package by.gsu.pms.utils;
+package by.gsu.pms;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
